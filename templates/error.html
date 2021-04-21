@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Cardio Moniter</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style>
+
+body { 
+	width: 100%;
+	height:auto;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	font-size: 18px;
+	text-align:center;
+	letter-spacing:1.2px;
+}
+#form-div{
+        background: rgba(0, 0, 0, 0.54);
+        border-width: 0.2rem !important;
+        border-radius: 2% !important;   
+    }
+input,select{
+        outline: none !important;
+        background: rgba(75, 74, 74, 0.555) !important;
+        border-radius: solid 2px orange !important;
+        color: white !important;
+    }
+    h1{
+        color: orange !important;
+    }
+    footer{
+        background: rgba(4, 0, 255, 0.534) !important;
+        color: rgb(253, 253, 253) !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    nav{
+        background: rgba(0, 0, 0, 0.596) !important;
+        box-shadow: rgb(241, 239, 239) 2px 8px;
+    }
+    p{
+        border-bottom: 2px solid orangered;
+    }
+    .navbar-brand{
+        font-family: 'Berkshire Swash', cursive;
+    }
+</style>
+ 
+</head>
+<body>
+    <nav class=" text-center navbar navbar-expand-md mb-2">
+        <a class="navbar-brand" href="{{ url_for('home') }}"><span class="r-name font-weight-bold"> <img src="static/heartlogo.png" height="40px" width="40px"/>Cardio Moniter</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <h4 class="text-info mt-1 mb-1 p-3">hi there, We think that you have not filled all the details please fill all the required details. If you have filled then its </h4>
+    <img src="static/500.webp" alt=" " class="mt-1">
+</body>
+</html>
+
+
+
+
+    
+</html>

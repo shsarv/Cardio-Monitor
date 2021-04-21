@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Cardio Moniter</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style>
+
+body { 
+	width: 100%;
+	height:auto;
+	font-family: 'Open Sans', sans-serif;
+	color: #fff;
+	font-size: 18px;
+	text-align:center;
+	letter-spacing:1.2px;
+    background-image: url("../static/heart.jpeg");
+    background-size: cover;	
+}
+#form-div{
+        background: rgba(0, 0, 0, 0.54);
+        border-width: 0.2rem !important;
+        border-radius: 2% !important;   
+    }
+input,select{
+        outline: none !important;
+        background: rgba(75, 74, 74, 0.555) !important;
+        border-radius: solid 2px orange !important;
+        color: white !important;
+    }
+    h1{
+        color: orange !important;
+    }
+    footer{
+        background: rgba(37, 199, 99, 0.534) !important;
+        color: rgb(253, 253, 253) !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    nav{
+        background: rgba(0, 0, 0, 0.596) !important;
+        box-shadow: rgba(10, 35, 180, 0.582) 2px 8px;
+    }
+    p{
+        border-bottom: 2px solid orangered;
+    }
+    .navbar-brand{
+        font-family: 'Berkshire Swash', cursive;
+    }
+</style>
+ 
+</head>
+<body>
+    <nav class=" text-center navbar navbar-expand-md mb-2">
+        <a class="navbar-brand" href="{{ url_for('home') }}"><span class="r-name font-weight-bold"> <img src="static/heartlogo.png" height="40px" width="40px"/>Cardio Moniter</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <div class="container align-items-center mt-1">
+        <div class="row">
+            <div class=" col-md-10 offset-md-1 col-xs-12 border shadow-lg p-4 mt-1" id="form-div">
+                <div class="pb-1 pt-1 mb-2 text-center shadow">
+                    <h1 class="pb-1 mb-1 h3 font-weight-bold"> CARDIO MONITER</h1>
+                    <p class="text-info pb-1">This web app helps you to find out whether you are at a risk of developing a heart disease. <br>
+                        Please fill below details to know your Heart Condition.</p>
+                </div>
+                <form action="{{ url_for('predict')}}"method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6"><input class="form-control" type="text" name="name" placeholder="your Name"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="age" placeholder="your age eg. 34"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="trestbps" placeholder="resting blood pressure (trsestbps) eg-130mm/hg"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="chol" placeholder="serum cholestoral in mg/dl (chol) eg-250"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="thalach" placeholder="maximum heart rate achieved (thalach) eg-187"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="oldpeak" placeholder="ST depression value (oldpeak) eg-4"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="ca" placeholder="number of major vessels (0-3) colored by flourosopy (ca) eg-0"></div>
+                    <div class="form-group col-md-6">
+                        <select class="custom-select" id="cuisine" name="sex" placeholder="sex">
+                            <option value="none">Select a Gender</option>                
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select class="custom-select" name="cp" placeholder="cp">
+                            <option value="none">Select Chest pain Type</option>                
+                            <option value="Typical angina">Typical angina</option>
+                            <option value="ATypical angina">ATypical angina</option>
+                            <option value="Non-anginal pain">Non-anginal pain</option>
+                            <option value="Non-anginal pain">Non-anginal pain</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select class="custom-select"  name="exang" placeholder="exang">
+                            <option value="none">Select exercise induced angina</option>                
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select class="custom-select" name="fbs" placeholder="fbs">
+                            <option value="none">Select fasting blood sugar > 120 mg/dl</option>                
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select class="custom-select" name="slope" placeholder="slope">
+                            <option value="none">Select slope of the peak exercise</option>                
+                            <option value="Upsloping: better heart rate with excercise(uncommon)">Upsloping: better heart rate with excercise(uncommon)</option>
+                            <option value="Flatsloping: minimal change(typical healthy heart)">Flatsloping: minimal change(typical healthy heart)</option>
+                            <option value="Downsloping: signs of unhealthy heart">Downsloping: signs of unhealthy heart</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select class="custom-select" name="thal" placeholder="thal">
+                            <option value="none">Select heart rate condition(thal)</option>                
+                            <option value="fixed defect: used to be defect but ok now">fixed defect: used to be defect but ok now</option>
+                            <option value="reversable defect: no proper blood movement when excercising">Freversable defect: no proper blood movement when excercising</option>
+                            <option value="normal">normal</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select class="custom-select"  name="restecg" placeholder="resecg">
+                            <option value="none">Select resting electrocardiographic results</option>                
+                            <option value="Nothing to note">Nothing to note</option>
+                            <option value="ST-T Wave abnormality">ST-T Wave abnormality</option>
+                            <option value="Possible or definite left ventricular hypertrophy">Possible or definite left ventricular hypertrophy</option>
+                        </select>
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-large pt-3">Predict</button>
+                    
+                </form>
+            </div>
+        </div>
+        <footer class="mt-1 p-3 border-info">Made with ❤️ By Sarvesh Kumar Sharma
+            <a href="https://www.linkedin.com/in/shsarv/" class="text-primary h2">  <i class="fa fa-linkedin-square" aria-hidden="true">  </i></a> 
+            <a href="https://github.com/shsarv" class="text-dark h2">  <i class="fa fa-github" aria-hidden="true">  </i></a>
+        </footer>
+    </div>	
+</body>
+</html>
+
+
+
+
+    
+</html>

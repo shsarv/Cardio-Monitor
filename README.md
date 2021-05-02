@@ -1,5 +1,8 @@
 # Cardio-Monitor
+
 **Ongoing Project**
+
+
 Cardio Monotor is a web app that helps you to find out whether you are at a risk of developing a heart disease. **the model used for prediction has the accuracy of 92%.**
 
 This is the course project of subject Big Data Analytics (BCSE0158). THe Core Project is available... [here](https://github.com/shsarv/Heart-Disease-Prediction). 
@@ -35,4 +38,6 @@ will be attatched soon.
 MIT License.
 
  **Created By - Sarvesh Kumar Sharma**
+ 
+ 
  **Mentor - Mr. Ashutosh Shankhdhar**

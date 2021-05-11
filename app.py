@@ -1,68 +1,80 @@
-from flask import Flask, render_template ,url_for ,request
+from flask import Flask, render_template ,url_for ,request,Response
 import numpy as np
-import joblib
+import database
+import prediction
+import json
+import io
+import random
+import visualization
+from pymongo import MongoClient
+import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-scal=MinMaxScaler()
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
 
-model = open( "Heart_model1.pkl" , "rb" )
-clfr = joblib.load(model)
 
 app = Flask ( __name__ )
 
-def preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal ):   
- 
-    if sex=="male":
-        sex=1 
-    else: sex=0 
-    if cp=="Typical angina":
-        cp=0
-    elif cp=="Atypical angina":
-        cp=1
-    elif cp=="Non-anginal pain":
-        cp=2
-    elif cp=="Asymptomatic":
-        cp=2
-    if exang=="Yes":
-        exang=1
-    elif exang=="No":
-        exang=0
-    if fbs=="Yes":
-        fbs=1
-    elif fbs=="No":
-        fbs=0
-    if slope=="Upsloping: better heart rate with excercise(uncommon)":
-        slope=0
-    elif slope=="Flatsloping: minimal change(typical healthy heart)":
-          slope=1
-    elif slope=="Downsloping: signs of unhealthy heart":
-        slope=2  
-    if thal=="fixed defect: used to be defect but ok now":
-        thal=6
-    elif thal=="reversable defect: no proper blood movement when excercising":
-        thal=7
-    elif thal=="normal":
-        thal=2.31
-    if restecg=="Nothing to note":
-        restecg=0
-    elif restecg=="ST-T Wave abnormality":
-        restecg=1
-    elif restecg=="Possible or definite left ventricular hypertrophy":
-        restecg=2
-    user_input=[age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal]
-    user_input=np.array(user_input)
-    user_input=user_input.reshape(1,-1)
-    user_input=scal.fit_transform(user_input)
-    prediction = clfr.predict(user_input)
 
-    return prediction
+
+# @app.route('/plot1.png')
+# def plot_png1():
+#     fig = visualization.create_figure2(data1)
+#     output = io.BytesIO()
+#     FigureCanvas(fig).print_png(output)
+#     return Response(output.getvalue(), mimetype='image/png')
+
+# @app.route('/plot2.png')
+# def plot_png2():
+#     fig = visualization.create_figure2(data2)
+#     output = io.BytesIO()
+#     FigureCanvas(fig).print_png(output)
+#     return Response(output.getvalue(), mimetype='image/png')
+
+
+def create_figure1(data1):
+    fig = plt.subplots(figsize =(12, 8))
+    barWidth = 0.25
+    normal = data1[0]
+    user = data1[1]
+    br1 = np.arange(len(normal))
+    br2 = [x + barWidth for x in br1]
+    # br3 = [x + barWidth for x in br2]
+    plt.bar(br1, normal, color ='g', width = barWidth,edgecolor ='grey', label ='Normal Value')
+    plt.bar(br2, user, color ='r', width = barWidth,edgecolor ='grey', label ="Yours Value")
+    # plt.bar(br3, CSE, color ='b', width = barWidth, edgecolor ='grey', label ='CSE')
+    plt.xlabel('Health status defining attributes', fontweight ='bold', fontsize = 15)
+    plt.ylabel('respective values', fontweight ='bold', fontsize = 15)
+    plt.xticks([r + barWidth for r in range(len(normal))],['cp','chol','fbs','exang','oldpeak','slope','ca','thal'])
+    plt.legend()
+    plt.savefig('static/plotng.png') 
+
+def create_figure2(data2):
+    fig = plt.subplots(figsize =(12, 8))
+    barWidth = 0.25
+    normal = data2[0]
+    user = data2[1]
+    br1 = np.arange(len(normal))
+    br2 = [x + barWidth for x in br1]
+    plt.bar(br1, normal, color ='g', width = barWidth,edgecolor ='grey', label ='Normal Value')
+    plt.bar(br2, user, color ='r', width = barWidth,edgecolor ='grey', label ="Yours Value")
+    plt.xlabel('Health status defining attributes', fontweight ='bold', fontsize = 15)
+    plt.ylabel('respective values', fontweight ='bold', fontsize = 15)
+    plt.xticks([r + barWidth for r in range(len(normal))],['trestbps','chol','thalach'])
+    plt.legend()
+    plt.savefig('static/plotng2.png') 
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
 
+
 @app.route('/predict',methods=['POST'])
 def predict():
+    global data1
+    global data2
     if request.method  == 'POST':
         nameofpatient= request.form ['name']
         age= request.form ['age']
@@ -78,13 +90,20 @@ def predict():
         slope=request.form ['slope']
         ca=request.form ['ca']
         thal=request.form ['thal']
-        result=preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal )
+        result=prediction.preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal )
+        #database.crudOperation(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal,result)
+        data1,data2=visualization.visualizationpreprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal,result)
+        create_figure1(data1)
+        create_figure2(data2)
         return render_template ('result.html',prediction = result, nameofpatient=nameofpatient)
+
+
 
 @app.errorhandler(500)
 def internal_error(error):
 
     return render_template('error.html')
+
 
 @app.errorhandler(404)
 def not_found(error):

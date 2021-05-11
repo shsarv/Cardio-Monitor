@@ -24,65 +24,85 @@ body {
     background-image: url("../static/heart.jpeg");
     background-size: cover;	
 }
-#form-div{
-        background: rgba(0, 0, 0, 0.54);
-        border-width: 0.2rem !important;
-        border-radius: 2% !important;   
-    }
-input,select{
-        outline: none !important;
-        background: rgba(75, 74, 74, 0.555) !important;
-        border-radius: solid 2px orange !important;
-        color: white !important;
-    }
-    h1{
-        color: orange !important;
-    }
-    footer{
-        background: rgba(37, 199, 99, 0.534) !important;
-        color: rgb(253, 253, 253) !important;
-        font-weight: bold !important;
-        text-align: center !important;
-    }
+    
     nav{
-        background: rgba(0, 0, 0, 0.596) !important;
-        box-shadow: rgba(10, 35, 180, 0.582) 2px 8px;
+        background: teal !important;
+        box-shadow:black 2px 8px;
     }
-    p{
-        border-top: 2px solid orangered;
-    }
+    
     .navbar-brand{
         font-family: 'Berkshire Swash', cursive;
+        color: #fff !important;
     }
+    .card-header{
+        background-color:none !important;
+    }
+    .container{
+        background-color: rgba(20, 20, 20, 0.603) !important;
+    }
+    
 </style>
  
 </head>
 <body>
-    <nav class=" text-center navbar navbar-expand-md mb-2">
-        <a class="navbar-brand" href="{{ url_for('home') }}"><span class="r-name font-weight-bold"> <img src="static/heartlogo.png" height="40px" width="40px"/>Cardio Moniter</span></a>
+    <nav class=" text-center navbar navbar-expand-md mb-3">
+        <a class="navbar-brand" href="{{ url_for('home') }}"><span class="r-name font-weight-bold"> <img src="static/heartlogo.png" height="40px" width="40px"/>Cardio Monitor</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </nav>
-    <div class="container align-items-center">
-        <div class="row">
-            <div class=" col-md-10 offset-md-1 col-xs-12 border shadow-lg p-sm-4 p-xs-1 mt-1" id="form-div">
-                <div class="pb-1 pt-1 mb-2 text-center shadow">
+    <div class="container align-items-center border rounded shadow">
+        <div class="row border rounded">
+            <div class=" col-md-12">
+                <div class="my-1 mb-3 text-center">
+                    <div class="card-header p-2 my-1 text-center"><h2 class="font-weight-bold text-center text-success">Prediction</h2>
+                    <h4 class="my-1 border-bottom p-2">Hello {{nameofpatient}}</h4>
+                </div>
+                    <div class="card-body">
                     {% if prediction==0 %}
-                    <h2>Prediction: <span class='text-info h5'>Hurrah!!!! {{nameofpatient}} , You have very less chances of getting heart disease.</span></h2>
-                    <img class="gif" src="https://media1.tenor.com/images/f63d55f66403ae53124638db92de3d14/tenor.gif?itemid=9379162" alt="not suffering Image">
+                    <div class="row">
+                        <div class="col-md-6 border-right">
+                        <div class="d-flex h-100">
+                            <div class="row justify-content-center align-self-center">
+                             
+                            <p class="p-2">Hurrah !!!! You have <span class="text-success font-weight-bold">very less chances of getting heart disease</span>.Want to know more about the cardiovascular diseases. Please  <a href="#" class="btn btn-primary"> click here</a></p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6"><img class="gif" src="https://media.tenor.com/images/eb53c2a525f26f2504c7e7ba27c2470b/tenor.gif" alt="not suffering Image"></div> 
+                    </div>
                 {% elif prediction==1 %}
-                    <h1>Prediction: <span class='text-danger h5'>Ooops {{nameofpatient}} , you have very high risk of getting heart disease, Please contact your doctor immediately.</span></h1>
-                    <img class="gif1" src="https://media1.tenor.com/images/26518b2c51861e9f963f7038c3ca1a50/tenor.gif?itemid=15840238" alt="suffering Image" height="400px" width="400px">
+                <div class="row">
+                    <div class="col-md-6 border-right">
+                        <div class="d-flex h-100">
+                        <div class="row justify-content-center align-self-center">
+                        <p class="p-2 ">Unfortunetly, you have <span class="text-danger font-weight-bold text-underline"> high risk of getting heart disease</span>, Please contact your doctor immediately.<br /> To get more information about cardio-vascular diseases . <a href="#" class="btn btn-primary">click here</a>
+                        </p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6"><img class="gif1" src="https://media.tenor.com/images/941b7c7ddbe833e186af7704e26aa3df/tenor.gif" alt="suffering Image" height="300px" width="300px"></div>
+                </div>    
                 {% endif %}
-                <p class="m-1 p-1 text-warning">Caution: This is just a prediction and not doctoral advice. Kindly see a doctor if you feel the symptoms persist.</p>
+            </div>
+            </div>
+            </div>
+            <div class="col-12 h2 font-weight-bold text-white mb-0 pb-1">Your Data Statistics</div>
+            <div class="col-md-6 col-sm-12">
+                <img src="{{url_for('static', filename='plotng.png')}}" alt="not found" class="img-thumbnail">
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <img src="{{url_for('static', filename='plotng2.png')}}" alt="not found" class="img-thumbnail">
+            </div>
+            <div class="col-12">
+                <p class="m-1 p-1 text-warning">Caution: This is just a prediction and not doctoral advice. Kindly see a doctor if you feel the symptoms persist.</p>      
             </div>
         </div>
-        <footer class="mt-1 p-3 border-info">Made with ❤️ By Sarvesh Kumar Sharma
-            <a href="https://www.linkedin.com/in/shsarv/" class="text-primary h2">  <i class="fa fa-linkedin-square" aria-hidden="true">  </i></a> 
-            <a href="https://github.com/shsarv" class="text-dark h2">  <i class="fa fa-github" aria-hidden="true">  </i></a>
-        </footer>
-    </div>	
+    </div>
+    <footer class="mt-4 p-3 container border rounded shadow">Made while having ☕️. By Sarvesh Kumar Sharma
+        <a href="https://www.linkedin.com/in/shsarv/" class="text-primary fa-2x"><i class="fa fa-linkedin-square" aria-hidden="true"> </i></a> 
+        <a href="https://github.com/shsarv" class="text-white fa-2x"> <i class="fa fa-github" aria-hidden="true"> </i></a>
+    </footer>	
 </body>
 </html>
 

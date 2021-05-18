@@ -1,3 +1,4 @@
+from itertools import count
 from flask import Flask, render_template ,url_for ,request,Response
 import numpy as np
 import database
@@ -12,6 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+import modelbuild
 
 
 app = Flask ( __name__ )
@@ -67,14 +69,22 @@ def create_figure2(data2):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    global counter2
+    counter2+=1
+    return render_template('home.html',all_count=counter2)
 
 
+global counter
+counter=0
+global counter2
+counter2=0
 
 @app.route('/predict',methods=['POST'])
 def predict():
     global data1
     global data2
+    global counter
+    global counter2
     if request.method  == 'POST':
         nameofpatient= request.form ['name']
         age= request.form ['age']
@@ -90,13 +100,22 @@ def predict():
         slope=request.form ['slope']
         ca=request.form ['ca']
         thal=request.form ['thal']
-        result=prediction.preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal )
+        counter+=1
+        if(counter<=50):
+            result=prediction.preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal )
+        else:
+            #modelbuild.bulidmodel()
+            result=prediction.preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal )
+            counter=0
         #database.crudOperation(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal,result)
         data1,data2=visualization.visualizationpreprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal,result)
         create_figure1(data1)
         create_figure2(data2)
-        return render_template ('result.html',prediction = result, nameofpatient=nameofpatient)
+        return render_template ('result.html',prediction = result, nameofpatient=nameofpatient, model_counter=counter, total_counter=counter2)
 
+@app.route('/about')
+def about():
+    return render_template('disease.html')
 
 
 @app.errorhandler(500)

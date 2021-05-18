@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 import json
 import os
 import visualization
+import sys
 
 
 def mongodbConncect():
@@ -68,8 +69,13 @@ def crudOperation(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slo
     data_dict=crudprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal,result)
     data1=json.dumps(data_dict,separators=(',', ':'), sort_keys=True)
     value = json.loads(data1)
-    mycol=mongodbConncect()
-    # mycol.insert(value)
+    try:
+        mycol=mongodbConncect()
+        mycol.insert(value)
+        print('Inserted 1 data to database')
+    except:
+        print('unable to insert', file=sys.stderr)
+
 
 
 # if __name__ == '__main__':

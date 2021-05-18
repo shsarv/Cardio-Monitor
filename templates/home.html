@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html >
-<!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
   <meta charset="UTF-8">
   <title>Cardio Moniter</title>
@@ -21,66 +20,124 @@ body {
 	font-size: 18px;
 	text-align:center;
 	letter-spacing:1.2px;
-    background-image: url("../static/heart.jpeg");
+    background-image: url("../static/about.jpg");
     background-size: cover;	
 }
 #form-div{
-        background: rgba(0, 0, 0, 0.54);
         border-width: 0.2rem !important;
-        border-radius: 2% !important;   
+        border-radius: 2% !important;
+        box-shadow: rgb(187, 183, 183) 3px 7px !important; 
+        /* background-image: url("../static/heart.jpeg");
+        background-size: cover;	 */
+        background:rgba(100, 148, 237, 0.685);
+
     }
+#form-div:hover{
+    box-shadow: rgb(104, 104, 104) 5px 10px !important;
+}
 input,select{
         outline: none !important;
-        background: rgba(75, 74, 74, 0.555) !important;
-        border-radius: solid 2px orange !important;
-        color: white !important;
+        border: none !important;
+        border-bottom:green 2px solid !important;
     }
-    h1{
-        color: orange !important;
+input:focus,input:active{
+        outline: none !important;
+        border: none !important;
     }
-    footer{
-        background: rgba(37, 199, 99, 0.534) !important;
-        color: rgb(253, 253, 253) !important;
-        font-weight: bold !important;
-        text-align: center !important;
+input::placeholder,select::placeholder{ 
+  color: black !important;
+  opacity: 1;
+}
+h1{
+    color: orange !important;
     }
-    nav{
-        background: rgba(0, 0, 0, 0.596) !important;
-        box-shadow: rgba(10, 35, 180, 0.582) 2px 8px;
+footer{
+    background: teal !important;
+    color: rgb(253, 253, 253) !important;
+    font-weight: bold !important;
+    text-align: center !important;
     }
-    p{
-        border-bottom: 2px solid orangered;
+nav{
+    background: teal !important;
+    box-shadow: rgba(164, 164, 165, 0.582) 2px 8px;
+    color: white;
     }
-    .navbar-brand{
+p{
+    border-bottom: 2px solid orangered;
+    }
+.navbar-brand{
         font-family: 'Berkshire Swash', cursive;
     }
+.form-group{
+        border: none !important;
+        outline: none !important;
+    }
+.form-control:focus,select:focus,select:active{
+        box-shadow: gray 1px 3px !important;
+    }
+select option { color: black; }
+select option:first-child{
+  color: black;
+}
+#mobileview{
+    display: none;
+}
+#counter{
+    position: absolute;
+    right: 2%;
+    top: 11%;
+    z-index: 9999;
+    height: 50px;
+    min-width: 50px;
+    background-color: rgba(0, 128, 128, 0.397);
+    color: orange;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: large;
+
+}
+
+@media (max-width:767px) {
+    #mobileview{
+    display: block !important;
+}
+}
+    
 </style>
  
 </head>
 <body>
-    <nav class=" text-center navbar navbar-expand-md mb-2">
-        <a class="navbar-brand" href="{{ url_for('home') }}"><span class="r-name font-weight-bold"> <img src="static/heartlogo.png" height="40px" width="40px"/>Cardio Moniter</span></a>
+    <nav class=" text-center navbar navbar-expand-md mb-3">
+        <a class="navbar-brand text-white" href="{{ url_for('home') }}"><span class="r-name font-weight-bold"> <img src="static/heartlogo.png" height="40px" width="40px"/>Cardio Monitor</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    </nav>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('about') }}">About heart disease</a>
+          </div>
+        </div>
+      </nav>
     <div class="container align-items-center mt-1">
+        <h4 class="text-dark my-2 p-2" id="mobileview">Click to know ☞<a class="text-info " href="{{ url_for('about') }}" >About heart disease</a></h4>
+        <div class="rounded border" id="counter">{{all_count}}</div>
         <div class="row">
-            <div class=" col-md-10 offset-md-1 col-xs-12 border shadow-lg p-4 mt-1" id="form-div">
-                <div class="pb-1 pt-1 mb-2 text-center shadow">
-                    <h1 class="pb-1 mb-1 h3 font-weight-bold"> CARDIO MONITER</h1>
-                    <p class="text-info pb-1">This web app helps you to find out whether you are at a risk of developing a heart disease. <br>
+            <div class=" col-md-10 offset-md-1 col-xs-12 border p-4 mt-1" id="form-div">
+                <div class="pb-1 pt-1 mb-2 text-center">
+                    <h1 class="pb-1 mb-1 h3 font-weight-bold"> CARDIO MONITOR</h1>
+                    <p class="text-white pb-1">This web app helps you to find out whether you are at a risk of developing a heart disease. <br>
                         Please fill below details to know your Heart Condition.</p>
                 </div>
                 <form action="{{ url_for('predict')}}"method="post">
                     <div class="form-row">
-                        <div class="form-group col-md-6"><input class="form-control" type="text" name="name" placeholder="your Name"></div>
-                    <div class="form-group col-md-6"><input class="form-control" type="number" name="age" placeholder="your age eg. 34"></div>
-                    <div class="form-group col-md-6"><input class="form-control" type="number" name="trestbps" placeholder="resting blood pressure (trsestbps) eg-130mm/hg"></div>
-                    <div class="form-group col-md-6"><input class="form-control" type="number" name="chol" placeholder="serum cholestoral in mg/dl (chol) eg-250"></div>
-                    <div class="form-group col-md-6"><input class="form-control" type="number" name="thalach" placeholder="maximum heart rate achieved (thalach) eg-187"></div>
+                        <div class="form-group col-md-6"><input class="form-control" type="text" name="name" placeholder="Your Name"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="age" placeholder="Your Age eg. 34"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="trestbps" placeholder="Resting blood pressure (trsestbps) eg-130mm/hg"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="chol" placeholder="Serum cholestoral in mg/dl (chol) eg-250"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="thalach" placeholder="Maximum heart rate achieved (thalach) eg-187"></div>
                     <div class="form-group col-md-6"><input class="form-control" type="number" name="oldpeak" placeholder="ST depression value (oldpeak) eg-4"></div>
-                    <div class="form-group col-md-6"><input class="form-control" type="number" name="ca" placeholder="number of major vessels (0-3) colored by flourosopy (ca) eg-0"></div>
+                    <div class="form-group col-md-6"><input class="form-control" type="number" name="ca" placeholder="Number of major vessels (0-3) colored by flourosopy (ca) eg-0"></div>
                     <div class="form-group col-md-6">
                         <select class="custom-select" id="cuisine" name="sex" placeholder="sex">
                             <option value="none">Select a Gender</option>                
@@ -136,12 +193,12 @@ input,select{
                         </select>
                     </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block btn-large pt-3">Predict</button>
-                    
+                    <button type="submit" class="btn btn-primary btn-block btn-large pt-3">Predict</button>   
                 </form>
+                <div class="my-1 p-1 text-warning border-top ">Note : By clicking prediction, you agree that your information will be stored to enhance model.</div>
             </div>
         </div>
-        <footer class="mt-1 p-3 border-info">Made with ❤️ By Sarvesh Kumar Sharma
+        <footer class="mt-4 p-3 border-info">Made while having ☕️. By Sarvesh Kumar Sharma
             <a href="https://www.linkedin.com/in/shsarv/" class="text-primary h2">  <i class="fa fa-linkedin-square" aria-hidden="true">  </i></a> 
             <a href="https://github.com/shsarv" class="text-dark h2">  <i class="fa fa-github" aria-hidden="true">  </i></a>
         </footer>

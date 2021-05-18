@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Cardio Moniter</title>
+    <style>
+
+        body { 
+            font-family: 'Open Sans', sans-serif;
+            letter-spacing:1.2px;
+            background-image: url("../static/about.jpg");
+            background-size: cover;	
+        }
+            
+            nav{
+                background: teal !important;
+                box-shadow:black 2px 8px;
+            }
+            
+            .navbar-brand{
+                font-family: 'Berkshire Swash', cursive;
+                color: #fff !important;
+            }
+            
+        </style>
+  </head>
+  <body>
+    <nav class=" text-center navbar navbar-expand-md">
+      <a class="navbar-brand" href="{{ url_for('home') }}"><span class="r-name font-weight-bold"> <img src="static/heartlogo.png" height="40px" width="40px"/>Cardio Monitor</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link text-white font-weight-bold" href="{{ url_for('about') }}">About heart disease</a>
+          </div>
+        </div>
+    </nav>
+    <div id="carouselExampleIndicators" class="carousel slide mt-1" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{url_for('static', filename='corousal/img2.png')}}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{url_for('static', filename='corousal/img3.png')}}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{url_for('static', filename='corousal/img4.png')}}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{url_for('static', filename='corousal/img5.png')}}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{url_for('static', filename='corousal/img6.png')}}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="container-fluid p-3 my-3 mx-2">
+      <div>
+        <h2 class="text-info text-center font-weight-bold">About Heart disease</h2>
+        <p>
+          Heart disease refers to any condition affecting the heart. There are many types, some of which are preventable. Unlike cardiovascular disease, which includes problems with the entire circulatory system, heart disease affects only the heart. According to the Centers for Disease Control and Prevention (CDC), heart disease is the leading cause of death in the United States. Around 1 in 4 deathsTrusted Source in the U.S. occur due to heart disease, and it affects all genders as well as all racial and ethnic groups.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-info text-center font-weight-bold">Types</h2>
+        <p>There are several different types of heart disease, and they affect the heart in different ways. The sections below will look at some different types of heart disease in more detail.</p>
+        <div>
+          <h4 class="text-danger">Coronary artery disease</h4>
+          <p>Coronary artery disease, also known as coronary heart disease, is the most common type of heart disease. It develops when the arteries that supply blood to the heart become clogged with plaque. This causes them to harden and narrow. Plaque contains cholesterol and other substances. As a result, the blood supply reduces, and the heart receives less oxygen and fewer nutrients. In time, the heart muscle weakens, and there is a risk of heart failure and arrhythmias. When plaque builds up in the arteries, this is called atherosclerosis.</p>
+          <h4 class="text-danger">Congenital heart defects</h4>  
+          <p>A person with a congenital heart defect is born with a heart problem. There are many types of congenital heart defect, including:</p>
+          <ul>
+          <li>Abnormal heart valves: Valves may not open properly or may leak blood.</li>
+          <li>Septal defects: There is a hole in the wall between either the lower chambers or the upper chambers of the heart.</li>
+          <li>Atresia: One of the heart valves is missing.</li>
+          </ul>
+          <p>Congenital heart disease can involve major structural issues, such as the absence of a ventricle and problems with the main arteries that leave the heart. Many congenital heart problems do not cause any noticeable symptoms and only become apparent during a routine medical check. According to the American Heart Association (AHA), heart murmurs often affect children, but only some are due to a defect.</p>
+        </div>
+        <div>
+          <h4 class="text-danger">Arrhythmia</h4>  
+          <p>Arrhythmia refers to an irregular heartbeat. It occurs when the electrical impulses that coordinate the heartbeat do not work properly. As a result, the heart may beat too fast, too slowly, or erratically. There are various types of arrhythmia, including:</p>
+          <ul>
+            <li>Tachycardia: This refers to a rapid heartbeat.</li>
+            <li>Bradycardia: This refers to a slow heartbeat.</li>
+            <li>Premature contractions: This refers to an early heartbeat.</li>
+            <li>Atrial fibrillation: This is a type of irregular heartbeat.</li>
+          </ul>
+          <p>A person may notice a feeling like a fluttering or a racing heart. Brief changes in heart rhythm are not a cause for concern, but treatment will be necessary if they persist, as this can affect the heart’s function. In some cases, arrhythmias can even be life threatening. </p>
+        </div>  
+        <div>
+          <h4 class="text-danger">Dilated cardiomyopathy</h4>  
+          <p>In dilated cardiomyopathy, the heart chambers become dilated, meaning that the heart muscle stretches and becomes thinner. The most common causes of dilated cardiomyopathy are prior heart attacks, arrhythmias, and toxins. As a result, the heart becomes weaker and cannot pump blood properly. It can result in arrhythmia, blood clots in the heart, and heart failure. It usually affects people aged 20–60 years, according to the AHA. </p>
+          <h4 class="text-danger">Myocardial infarction</h4>    
+          <p>Also known as heart attack, myocardial infarction involves an interruption of the blood flow to the heart. This can damage or destroy part of the heart muscle. The most common cause of heart attack is plaque, a blood clot, or both in a coronary artery. It can also occur if an artery suddenly narrows or spasms.
+          </p>  
+          <h4 class="text-danger">Heart failure</h4>
+          <p> When a person has heart failure, the heart is still working but not as well as it should. Congestive heart failure is a type of heart failure. Heart failure can result from untreated coronary artery disease, high blood pressure, arrhythmias, and other conditions. These conditions can affect the heart’s ability to pump properly. Heart failure can be life threatening, but seeking early treatment for heart-related conditions can help prevent complications.</p>
+          <h4 class="text-danger">Hypertrophic cardiomyopathy</h4> 
+          <p>This condition usually develops when a genetic problem affects the heart muscle. It tends to be an inherited condition. The walls of the muscle thicken, and contractions become harder. This affects the heart’s ability to take in and pump out blood. In some cases, an obstruction can occur. There may be no symptoms, and many people do not receive a diagnosis. However, hypertrophic cardiomyopathy can worsen over time and lead to various heart problems. Anyone with a family history of this condition should ask for screening, as receiving treatment can help prevent complications. Hypertrophic cardiomyopathy is the main cause of cardiac death among athletes and people aged under 35 years, according to the AHA.
+          <h4 class="text-danger">Mitral valve regurgitation</h4>   
+          <p>This event occurs when the mitral valve in the heart does not close tightly enough and allows blood to flow back into the heart. As a result, blood cannot move through the heart or the body efficiently, and it can put pressure on the veins leading from the lungs to the heart. In time, the heart can become enlarged, and heart failure can result.</p>
+          <h4 class="text-danger">Mitral valve prolapse</h4> 
+          <p>This happens when the valve flaps of the mitral valve do not close properly. Instead, they bulge into the left atrium. This can cause a heart murmur. Mitral valve prolapse is not usually life threatening, but some people may need treatment.Genetic factors and connective tissue problems can cause this condition, which affects around 2% of the population.</p>
+          <h4 class="text-danger">Aortic stenosis</h4> 
+          <p>In aortic stenosis, the pulmonary valve is thick or fused and does not open properly. This makes it hard for the heart to pump blood from the right ventricle into the pulmonary artery. In aortic stenosis, the aortic valve opening is too narrow, restricting blood flow from the left ventricle to the aorta. It can also impact the pressure in the left atrium. A person may be born with it, or it may develop over time due to calcium deposits or scarring</p>
+      </div>
+      <div>
+        <h2 class="text-info text-center font-weight-bold">Symptoms</h2>
+        <p>Heart disease symptoms depend on what type of heart disease you have.</p>
+        <h4 class="text-danger">Symptoms of heart disease in your blood vessels</h4> 
+        <p>A buildup of fatty plaques in your arteries, or atherosclerosis (ath-ur-o-skluh-ROE-sis) can damage your blood vessels and heart. Plaque buildup causes narrowed or blocked blood vessels that can lead to a heart attack, chest pain (angina) or stroke. Coronary artery disease symptoms may be different for men and women. For instance, men are more likely to have chest pain. Women are more likely to have other signs and symptoms along with chest discomfort, such as shortness of breath, nausea and extreme fatigue. Signs and symptoms can include:
+        </p>
+        <ul>
+          <li>Chest pain, chest tightness, chest pressure and chest discomfort (angina)</li>
+          <li>Shortness of breath</li>
+          <li>Pain, numbness, weakness or coldness in your legs or arms if the blood vessels in those parts of your body are narrowed</li>
+          <li>Pain in the neck, jaw, throat, upper abdomen or back</li>
+        </ul>
+        <p>You might not be diagnosed with coronary artery disease until you have a heart attack, angina, stroke or heart failure. It's important to watch for cardiovascular symptoms and discuss concerns with your doctor. Cardiovascular disease can sometimes be found early with regular evaluations. Heart disease symptoms caused by abnormal heartbeats (heart arrhythmias) Your heart may beat too quickly, too slowly or irregularly. Heart arrhythmia signs and symptoms can include:</p>
+        <ul>
+          <li>Fluttering in your chest</li>
+          <li>Racing heartbeat (tachycardia)</li>
+          <li>Slow heartbeat (bradycardia)</li>
+          <li>Chest pain or discomfort</li>
+          <li>Shortness of breath</li>
+          <li>Lightheadedness</li>
+          <li>Dizziness</li>
+          <li>Fainting (syncope) or near fainting</li>
+        </ul>
+    <h4 class="text-danger">Heart disease symptoms caused by diseased heart muscle (cardiomyopathy)</h4>
+    <p>In early stages of cardiomyopathy, you may have no symptoms. As the condition worsens, symptoms may include:</p>
+    <ul>
+        <li>Breathlessness with activity or at rest &nbsp; &nbsp;</li>
+        <li>Swelling of the legs, ankles and feet &nbsp;&nbsp;</li>
+        <li>Fatigue</li>
+        <li>Irregular heartbeats that feel rapid, pounding or fluttering</li>
+        <li>Dizziness, lightheadedness and fainting</li>
+    </ul>
+    <h4 class="text-danger">Heart disease symptoms caused by heart infection</h4>
+    <p>Endocarditis is an infection that affects the inner lining of your heart chambers and heart valves (endocardium). Heart infection signs and symptoms can include:</p>
+    <ul>
+        <li>Fever</li>
+        <li>Shortness of breath</li>
+        <li>Weakness or fatigue &nbsp;</li>
+        <li>Swelling in your legs or abdomen</li>
+        <li>Changes in your heart rhythm</li>
+        <li>Dry or persistent cough</li>
+        <li>Skin rashes or unusual spots</li>
+    </ul>
+    <h4 class="text-danger">Heart disease symptoms caused by heart valve problems (valvular heart disease)</h4>
+    <p>The heart has four valves &mdash; the aortic, mitral, pulmonary and tricuspid valves &mdash; that open and close to direct blood flow through your heart. Many things can damage your heart valves, leading to narrowing (stenosis), leaking (regurgitation or insufficiency) or improper closing (prolapse).</p>
+    <p>Depending on which valve isn&apos;t working properly, valvular heart disease signs and symptoms generally include:</p>
+    <ul>
+        <li>Fatigue &nbsp;</li>
+        <li>Shortness of breath</li>
+        <li>Irregular heartbeat&nbsp;</li>
+        <li>Swollen feet or ankles &nbsp;</li>
+        <li>Chest pain&nbsp;</li>
+        <li>Fainting (syncope)</li>
+    </ul>
+    <h4 class="text-danger">When to see a doctor</h4>
+    <p>Seek emergency medical care if you have these heart disease signs and symptoms:</p>
+    <ul>
+        <li>Chest pain</li>
+        <li>Shortness of breath</li>
+        <li>Fainting</li>
+    </ul>
+  </div>
+  <div>
+    <h2 class="text-info text-center font-weight-bold">Risk factors</h2>
+<p>Risk factors for developing heart disease include:</p>
+<ul>
+    <li><strong>Age.</strong> Growing older increases your risk of damaged and narrowed arteries and a weakened or thickened heart muscle.</li>
+    <li><strong>Sex.</strong> Men are generally at greater risk of heart disease. The risk for women increases after menopause.</li>
+    <li><strong>Family history.</strong> A family history of heart disease increases your risk of coronary artery disease, especially if a parent developed it at an early age (before age 55 for a male relative, such as your brother or father, and 65 for a female relative, such as your mother or sister). &nbsp;</li>
+    <li><strong>Smoking.</strong> Nicotine tightens your blood vessels, and carbon monoxide can damage their inner lining, making them more susceptible to atherosclerosis. Heart attacks are more common in smokers than in nonsmokers.</li>
+    <li><strong>Poor diet.</strong> A diet that&apos;s high in fat, salt, sugar and cholesterol can contribute to the development of heart disease.</li>
+    <li><strong>High blood pressure.</strong> Uncontrolled high blood pressure can result in hardening and thickening of your arteries, narrowing the vessels through which blood flows.</li>
+    <li><strong>High blood cholesterol levels.</strong> High levels of cholesterol in your blood can increase the risk of plaque formation and atherosclerosis. &nbsp; &nbsp;</li>
+    <li><strong>Diabetes.</strong> Diabetes increases your risk of heart disease. Both conditions share similar risk factors, such as obesity and high blood pressure. &nbsp;</li>
+    <li><strong>Obesity.</strong> Excess weight typically worsens other heart disease risk factors.</li>
+    <li><strong>Physical inactivity.</strong> Lack of exercise also is associated with many forms of heart disease and some of its other risk factors as well.</li>
+    <li><strong>Stress.</strong> Unrelieved stress may damage your arteries and worsen other risk factors for heart disease.</li>
+    <li><strong>Poor dental health.</strong> It&apos;s important to brush and floss your teeth and gums often, and have regular dental checkups. If your teeth and gums aren&apos;t healthy, germs can enter your bloodstream and travel to your heart, causing endocarditis.</li>
+</ul>
+  </div>
+  <div><h2 class="text-info text-center font-weight-bold">Prevention</h2>
+    <p>Certain types of heart disease, such as heart defects, can&apos;t be prevented. However, the same lifestyle changes that can improve your heart disease can help you prevent it, including:</p>
+    <ul>
+        <li>Don&apos;t smoke.</li>
+        <li>Control other health conditions, such as high blood pressure, high cholesterol and diabetes.</li>
+        <li>Exercise at least 30 minutes a day on most days of the week.</li>
+        <li>Eat a diet that&apos;s low in salt and saturated fat.</li>
+        <li>Maintain a healthy weight. &nbsp;</li>
+        <li>Reduce and manage stress.</li>
+        <li>Practice good hygiene.</li>
+    </ul></div>
+    </div>
+  </body>
+</html>

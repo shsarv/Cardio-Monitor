@@ -89,7 +89,7 @@ footer{
                     <h4 class="my-1 border-bottom p-2 text-white font-weight-bold">Hello {{nameofpatient}}</h4>
                 </div>
                     <div class="card-body">
-                    {% if prediction==0 %}
+                    {% if prediction==1 %}
                     <div class="row">
                         <div class="col-md-6 border-right"><img class="gif" src="https://media.tenor.com/images/eb53c2a525f26f2504c7e7ba27c2470b/tenor.gif" alt="not suffering Image"></div> 
                         <div class="col-md-6 ">
@@ -100,7 +100,7 @@ footer{
                         </div>
                         </div>
                     </div>
-                {% elif prediction==1 %}
+                {% elif prediction==0 %}
                 <div class="row">
                     <div class="col-md-6 border-right"><img class="gif1" src="https://media.tenor.com/images/941b7c7ddbe833e186af7704e26aa3df/tenor.gif" alt="suffering Image" height="300px" width="300px"></div>
                     <div class="col-md-6 ">

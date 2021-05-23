@@ -1,10 +1,11 @@
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 import joblib
-scal=MinMaxScaler()
-model = open( "Heart_model1.pkl" , "rb" )
-clfr = joblib.load(model)
-
+scal=StandardScaler()
+clfr = joblib.load("heartmodel.pkl")
+ 
 def preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal ):   
  
     if sex=="male":
@@ -17,7 +18,7 @@ def preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,
     elif cp=="Non-anginal pain":
         cp=2
     elif cp=="Asymptomatic":
-        cp=2
+        cp=3
     if exang=="Yes":
         exang=1
     elif exang=="No":
@@ -45,9 +46,21 @@ def preprocess(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,
     elif restecg=="Possible or definite left ventricular hypertrophy":
         restecg=2
     user_input=[age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal]
+    df=pd.read_csv('heart.csv')
+    y = df["target"]
+    X = df.drop('target',axis=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state = 0)
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
     user_input=np.array(user_input)
     user_input=user_input.reshape(1,-1)
-    user_input=scal.fit_transform(user_input)
+    user_input=scaler.transform(user_input)
+    print(user_input)
     prediction = clfr.predict(user_input)
+    print(int(prediction))
 
-    return prediction
+    return int(prediction)
+
+# if __name__ == '__main__':
+#     t=preprocess(39,"male","Non-anginal pain",130,"ST-T Wave abnormality",250,"Yes",187,"Yes",2,"Downsloping: signs of unhealthy heart",2,"normal")
+#     print(int(t))
